@@ -1,5 +1,7 @@
 package org.quickorc.writer;
 
+import java.math.BigDecimal;
+import java.sql.Timestamp;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -19,6 +21,8 @@ public class WriterMappingRegistry {
 		registry.put(boolean.class, new WriterMapping<>(new BooleanWriter(), TypeDescription.createBoolean()));
 		registry.put(double.class, new WriterMapping<>(new DoubleWriter(), TypeDescription.createDouble()));
 		registry.put(Double.class, new WriterMapping<>(new DoubleWriter(), TypeDescription.createDouble()));
+		registry.put(Timestamp.class, new WriterMapping<>(new TimestampWriter(), TypeDescription.createTimestamp()));
+		registry.put(BigDecimal.class, new WriterMapping<>(new DecimalWriter(), TypeDescription.createDecimal()));
 	}
 	
 	public void register(Class<?> c, WriterMapping<Writer, TypeDescription> mapping) {

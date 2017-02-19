@@ -1,5 +1,7 @@
 package org.quickorc;
 
+import java.math.BigDecimal;
+import java.sql.Timestamp;
 import java.util.Date;
 import java.util.Random;
 
@@ -19,20 +21,22 @@ public class Mapper {
 		new Mapper().toORC();
 	}
 
-	Car buildCar() {
+	DummyObject buildCar() {
 		Random r = new Random();
-		Car c = new Car();
+		DummyObject c = new DummyObject();
 		c.setDate(new Date());
 		c.setCabrio(r.nextBoolean());
 		c.setModel(System.currentTimeMillis() + "model");
 		c.setTyres(r.nextInt(1000));
 		c.setWeight(r.nextDouble());
+		c.setTimestamp(new Timestamp(new Date().getTime()));
+		c.setBigDecimal(new BigDecimal(r.nextDouble()));
 		return c;
 	}
 
 	VectorizedRowBatch toORC() throws Exception {
 
-		TypeDescription schema = new SchemaBuilder().build(Car.class);
+		TypeDescription schema = new SchemaBuilder().build(DummyObject.class);
 		System.out.println(schema);
 
 		Configuration configuration = new Configuration();
@@ -47,7 +51,7 @@ public class Mapper {
 		VectorizedRowBatch batch = schema.createRowBatch();
 		for (int i = 0; i < 5; i++) {
 			int row = batch.size++;
-			Car obj = buildCar();
+			DummyObject obj = buildCar();
 			long t1 = System.currentTimeMillis();
 			QuickOrcWriter quickWriter = new QuickOrcWriter(schema, new WriterMappingRegistry());
 			batch = quickWriter.writeObject(obj, batch, row);

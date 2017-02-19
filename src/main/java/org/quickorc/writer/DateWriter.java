@@ -8,7 +8,7 @@ public class DateWriter extends LongWriter {
 
 	public void write(VectorizedRowBatch batch, int colIndex, int row, Object value) {
 		if (value != null)
-			visit(batch, colIndex, row, ((Date)value).getTime());
+			write(batch, colIndex, row, ((Date)value).getTime());
 	}
 	
 }
