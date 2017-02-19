@@ -5,26 +5,26 @@ import java.sql.Time;
 import java.sql.Timestamp;
 import java.util.Date;
 
-public class DummyObject {
-	private int tyres;
-	private String model;
-	private boolean cabrio;
+public class DummyObject2 {
+	private int intValue;
+	private String string;
+	private boolean booleanValue;
 	private Date date;
 	private Timestamp timestamp;
-	private Double weight;
+	private Double doubleValue;
 	private BigDecimal bigDecimal;
 	
-	public int getTyres() {
-		return tyres;
+	public int getIntValue() {
+		return intValue;
 	}
-	public void setTyres(int tyres) {
-		this.tyres = tyres;
+	public void setIntValue(int tyres) {
+		this.intValue = tyres;
 	}
-	public String getModel() {
-		return model;
+	public String getString() {
+		return string;
 	}
-	public void setModel(String model) {
-		this.model = model;
+	public void setString(String model) {
+		this.string = model;
 	}
 	public Date getDate() {
 		return date;
@@ -32,17 +32,17 @@ public class DummyObject {
 	public void setDate(Date date) {
 		this.date = date;
 	}
-	public Double getWeight() {
-		return weight;
+	public Double getDoubleValue() {
+		return doubleValue;
 	}
-	public void setWeight(Double weight) {
-		this.weight = weight;
+	public void setDoubleValue(Double weight) {
+		this.doubleValue = weight;
 	}
-	public boolean isCabrio() {
-		return cabrio;
+	public boolean isBooleanValue() {
+		return booleanValue;
 	}
-	public void setCabrio(boolean cabrio) {
-		this.cabrio = cabrio;
+	public void setBooleanValue(boolean cabrio) {
+		this.booleanValue = cabrio;
 	}
 	public Timestamp getTimestamp() {
 		return timestamp;

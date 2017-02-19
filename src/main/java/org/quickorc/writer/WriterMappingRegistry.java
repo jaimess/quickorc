@@ -9,7 +9,8 @@ import java.util.Map;
 import org.apache.orc.TypeDescription;
 
 public class WriterMappingRegistry {
-	private Map<Class<?>, WriterMapping<Writer, TypeDescription>> registry = new HashMap<>();
+	private Map<Class<?>, WriterMapping<?>> registry = new HashMap<>();
+	
 	public WriterMappingRegistry () {
 		registry.put(int.class, new WriterMapping<>(new IntWriter(), TypeDescription.createInt()));
 		registry.put(Integer.class, new WriterMapping<>(new IntWriter(), TypeDescription.createLong()));
@@ -25,16 +26,16 @@ public class WriterMappingRegistry {
 		registry.put(BigDecimal.class, new WriterMapping<>(new DecimalWriter(), TypeDescription.createDecimal()));
 	}
 	
-	public void register(Class<?> c, WriterMapping<Writer, TypeDescription> mapping) {
+	public void register(Class<?> c, WriterMapping<?> mapping) {
 		registry.put(c, mapping);
 	}
 	
-	public WriterMapping<Writer, TypeDescription>  getMapping(Class<?> c) {
+	public WriterMapping<?>  getMapping(Class<?> c) {
 		return registry.get(c);
 	}
 	
-	public Writer getVisitor(Class<?> c) {
-		return registry.get(c).getVisitor();
+	public Writer getWriter(Class<?> c) {
+		return registry.get(c).getWriter();
 	}
 	
 	public TypeDescription getTypeDescription(Class<?> c) {

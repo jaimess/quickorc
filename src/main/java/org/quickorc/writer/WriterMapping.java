@@ -2,29 +2,29 @@ package org.quickorc.writer;
 
 import org.apache.orc.TypeDescription;
 
-public class WriterMapping<V extends Writer, T extends TypeDescription> {
+public class WriterMapping<V extends Writer> {
 
-	private V visitor;
-	private T typeDescription;
+	private V writer;
+	private TypeDescription typeDescription;
 
-	public WriterMapping(V visitor, T typeDescription) {
-		this.visitor = visitor;
+	public WriterMapping(V writer, TypeDescription typeDescription) {
+		this.writer = writer;
 		this.typeDescription = typeDescription;
 	}
 
-	public V getVisitor() {
-		return visitor;
+	public V getWriter() {
+		return writer;
 	}
 
-	public void setVisitor(V visitor) {
-		this.visitor = visitor;
+	public void setWriter(V writer) {
+		this.writer = writer;
 	}
 
-	public T getTypeDescription() {
+	public TypeDescription getTypeDescription() {
 		return typeDescription;
 	}
 
-	public void setTypeDescription(T typeDescription) {
+	public void setTypeDescription(TypeDescription typeDescription) {
 		this.typeDescription = typeDescription;
 	}
 }

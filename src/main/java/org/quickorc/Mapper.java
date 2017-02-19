@@ -21,14 +21,14 @@ public class Mapper {
 		new Mapper().toORC();
 	}
 
-	DummyObject buildCar() {
+	AnnotatedDummyObject buildCar() {
 		Random r = new Random();
-		DummyObject c = new DummyObject();
+		AnnotatedDummyObject c = new AnnotatedDummyObject();
 		c.setDate(new Date());
-		c.setCabrio(r.nextBoolean());
-		c.setModel(System.currentTimeMillis() + "model");
-		c.setTyres(r.nextInt(1000));
-		c.setWeight(r.nextDouble());
+		c.setBooleanValue(r.nextBoolean());
+		c.setString(System.currentTimeMillis() + "model");
+		c.setIntValue(r.nextInt(1000));
+		c.setDoubleValue(r.nextDouble());
 		c.setTimestamp(new Timestamp(new Date().getTime()));
 		c.setBigDecimal(new BigDecimal(r.nextDouble()));
 		return c;
@@ -36,7 +36,7 @@ public class Mapper {
 
 	VectorizedRowBatch toORC() throws Exception {
 
-		TypeDescription schema = new SchemaBuilder().build(DummyObject.class);
+		TypeDescription schema = new SchemaBuilder().build(AnnotatedDummyObject.class);
 		System.out.println(schema);
 
 		Configuration configuration = new Configuration();
@@ -51,7 +51,7 @@ public class Mapper {
 		VectorizedRowBatch batch = schema.createRowBatch();
 		for (int i = 0; i < 5; i++) {
 			int row = batch.size++;
-			DummyObject obj = buildCar();
+			AnnotatedDummyObject obj = buildCar();
 			long t1 = System.currentTimeMillis();
 			QuickOrcWriter quickWriter = new QuickOrcWriter(schema, new WriterMappingRegistry());
 			batch = quickWriter.writeObject(obj, batch, row);
