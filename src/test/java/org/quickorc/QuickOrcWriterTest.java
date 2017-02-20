@@ -59,4 +59,29 @@ public class QuickOrcWriterTest {
 		return dummyObject;
 	}
 
+	private AnnotatedDummyObject buildAnnotatedDummyObject() {
+		AnnotatedDummyObject dummyObject = new AnnotatedDummyObject();
+		dummyObject.setBigDecimal(new BigDecimal(1234.1234));
+		dummyObject.setBooleanValue(true);
+		dummyObject.setDate(new Date());
+		dummyObject.setDoubleValue(4567.89);
+		dummyObject.setIntValue(1);
+		dummyObject.setLongValue(2L);
+		dummyObject.setString("string");
+		dummyObject.setTimestamp(new Timestamp(new Date().getTime()));
+		return dummyObject;
+	}
+
+	
+	@Test
+	public void testWriteObjectAnnotated() throws UnsupportedEncodingException {
+		AnnotatedDummyObject dummyObject = buildAnnotatedDummyObject();
+		TypeDescription typeDescription = new SchemaBuilder().build(AnnotatedDummyObject.class);
+		QuickOrcWriter orcWriter = new QuickOrcWriter(typeDescription, new WriterMappingRegistry());
+		VectorizedRowBatch batch = typeDescription.createRowBatch();
+		orcWriter.writeObject(dummyObject, batch, 0);
+		
+		assertTrue(Arrays.equals(dummyObject.getString().getBytes("UTF-8"), ((BytesColumnVector) batch.cols[0]).vector[0]));
+		assertEquals(dummyObject.getIntValue(), ((LongColumnVector) batch.cols[1]).vector[0], 0);
+	}
 }

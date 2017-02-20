@@ -6,7 +6,7 @@ import java.util.Date;
 
 import org.quickorc.annotation.QuickOrc;
 
-@QuickOrc(fields = { "intValue", "string" })
+@QuickOrc(fields = { "string", "intValue"})
 class AnnotatedDummyObject {
 
 	private int intValue;

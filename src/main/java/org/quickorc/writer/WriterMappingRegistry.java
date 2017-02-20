@@ -9,7 +9,7 @@ import java.util.Map;
 import org.apache.orc.TypeDescription;
 
 public class WriterMappingRegistry {
-	private Map<Class<?>, WriterMapping<?>> registry = new HashMap<>();
+	volatile private Map<Class<?>, WriterMapping<?>> registry = new HashMap<>();
 	
 	public WriterMappingRegistry () {
 		registry.put(int.class, new WriterMapping<>(new IntWriter(), TypeDescription.createInt()));

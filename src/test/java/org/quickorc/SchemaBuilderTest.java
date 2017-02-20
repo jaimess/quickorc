@@ -1,9 +1,6 @@
 package org.quickorc;
 
-import static org.junit.Assert.*;
-
-import java.lang.reflect.Field;
-import java.util.Comparator;
+import static org.junit.Assert.assertEquals;
 
 import org.apache.orc.TypeDescription;
 import org.junit.Test;
@@ -21,17 +18,8 @@ public class SchemaBuilderTest extends SchemaBuilder {
 
 	@Test
 	public void testBuildClassOfQComparatorOfField() {
-		TypeDescription expected = TypeDescription.fromString("struct<timestamp:timestamp,"
-				+ "string:string,longValue:bigint,intValue:int,doubleValue:double,date:date,booleanValue:boolean,"
-				+ "bigDecimal:decimal(38,10)>");
-		TypeDescription actual = build(DummyObject.class, new AlphabeticalInvertedComparator());
+		TypeDescription expected = TypeDescription.fromString("struct<string:string,intValue:int>");
+		TypeDescription actual = build(AnnotatedDummyObject.class);
 		assertEquals(expected, actual);
-	}
-
-	private class AlphabeticalInvertedComparator implements Comparator<Field> {
-		@Override
-		public int compare(Field o1, Field o2) {
-			return -1 * o1.getName().compareTo(o2.getName());
-		}
 	}
 }
