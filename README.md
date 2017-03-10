@@ -1,4 +1,4 @@
-# quickorc
+# quickorc [![Build Status](https://travis-ci.org/jaimess/quickorc.svg?branch=master)](https://travis-ci.org/jaimess/quickorc#master)
 Easy way to write java objects to apache orc files. Use @QuickOrc annotation to define which fields will be mapped. If @QuickOrc annotation is not present all fields will be mapped using default String comparator as sorter.
 # schema creation
 TypeDescription schema = new SchemaBuilder().build(AnnotatedDummyObject.class);
