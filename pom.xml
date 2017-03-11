@@ -6,7 +6,7 @@
 	<version>0.0.2-SNAPSHOT</version>
 
 	<name>${project.groupId}:${project.artifactId}</name>
-	<description>asy way to write java objects to apache orc files</description>
+	<description>Quickorc is an easy way to write java objects to apache orc files</description>
 	<url>https://github.com/jaimess/quickorc</url>
 
 	<developers>
